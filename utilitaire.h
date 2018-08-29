@@ -55,4 +55,10 @@ void sortCarsByCurrTime(structCar carsRace[]);
 void race(int index);
 void generateRecapFileRace();
 
+
+void sortCars(structCar carsQualif[], int sizeArrayCars);//trie les voitures pour la qualification
+void buildStartPosition(structCar carsQualif[], int q);//on place les voitures sur la ligne de départ
+void qualif(int index, int q);
+void generateRecapFileQualif();//feuille de résultats des qualifs
+
 #endif // utilitaire_h 
