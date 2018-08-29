@@ -14,8 +14,8 @@ qualifs.o: qualifs.c
 course.o: course.c
 	$(CC) -c course.c
 
-utilitaire.o: utilitaire.c
-	$(CC) -c utilitaire.c
+utilitaire.o: utils.c
+	$(CC) -c utils.c
 
 voiture.o: voiture.c
 	$(CC) -c voiture.c
