@@ -1,4 +1,4 @@
-#include "voiture.h"
+//#include "voiture.h"
 #include "utilitaire.h"
 
 //Initialisation dees voitures
