@@ -412,11 +412,10 @@ int main(int argc, char *argv[])
 	//Interactions avec l'utilisateur
 	int km;
 	char s[100];
-	puts("Welcome to this weekend Formula One GP!");
+	puts("Bienvenue");
 	do
 	{
-		puts("Enter here the length of a lap in kilometers");
-		puts("This number must be between 1 and 7");
+		puts("Indiquez la distance d'un tour en km ! (entre 1 et 7)");
 		
 		if (fgets(s, 100, stdin) == NULL)
 		{
