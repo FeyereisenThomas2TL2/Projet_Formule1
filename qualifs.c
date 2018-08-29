@@ -1,6 +1,6 @@
 #include "voiture.h"
-#include "utilitaire.h"
-#include "qualification.h"
+#include "utils.h"
+#include "qualifs.h"
 #include <stdio.h>
 #include <stdlib.h>
 
