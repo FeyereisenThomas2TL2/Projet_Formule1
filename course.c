@@ -1,5 +1,5 @@
 #include "utils.h"
-#include "course.h"
+//#include "course.h"
 
 
 void sortCarsByCurrTime(structCar carsRace[])
