@@ -1,6 +1,6 @@
 #ifndef utils_h
 #define utils_h
-#include "voiture.h"
+//#include "voiture.h"
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/ipc.h>
@@ -66,5 +66,21 @@ void sortCars(structCar carsQualif[], int sizeArrayCars);//trie les voitures pou
 void buildStartPosition(structCar carsQualif[], int q);//on place les voitures sur la ligne de départ
 void qualif(int index, int q);
 void generateRecapFileQualif();//feuille de résultats des qualifs
+
+
+typedef struct structCar {//déclaration de la structure d'une voiture
+	int name;           
+	double bestCircuit; 
+	double bestS1;      
+	double bestS2;      
+	double bestS3;      
+	int numCircuit;     
+	double currTime;    
+	double currCircuit; 
+	int inStand;
+	int isOut;
+}structCar;
+void init(int i, int name);//initialisation
+void reset(int i);//reinitialise le score des voitures
 
 #endif // utilitaire_h 
