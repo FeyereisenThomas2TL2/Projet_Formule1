@@ -13,6 +13,19 @@
 #include <errno.h>
 #include <signal.h>
 
+typedef struct structCar {//déclaration de la structure d'une voiture
+	int name;           
+	double bestCircuit; 
+	double bestS1;      
+	double bestS2;      
+	double bestS3;      
+	int numCircuit;     
+	double currTime;    
+	double currCircuit; 
+	int inStand;
+	int isOut;
+}structCar;
+
 //déclaration des variables utiles
 int nbrLapMax;
 int lengthCircuit;
@@ -67,19 +80,6 @@ void buildStartPosition(structCar carsQualif[], int q);//on place les voitures s
 void qualif(int index, int q);
 void generateRecapFileQualif();//feuille de résultats des qualifs
 
-
-typedef struct structCar {//déclaration de la structure d'une voiture
-	int name;           
-	double bestCircuit; 
-	double bestS1;      
-	double bestS2;      
-	double bestS3;      
-	int numCircuit;     
-	double currTime;    
-	double currCircuit; 
-	int inStand;
-	int isOut;
-}structCar;
 void init(int i, int name);//initialisation
 void reset(int i);//reinitialise le score des voitures
 
