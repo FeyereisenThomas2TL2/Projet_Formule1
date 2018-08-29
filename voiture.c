@@ -1,7 +1,7 @@
 //#include "voiture.h"
 #include "utils.h"
 
-//Initialisation dees voitures
+//Initialisation des voitures
 void init(int i, int name)
 {
 	cars[i].name = name;
