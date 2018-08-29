@@ -1,8 +1,8 @@
 #include "voiture.h"
-#include "utilitaire.h"
-#include "practice.h"
-#include "qualification.h"
-#include "race.h"
+#include "utils.h"
+#include "essais.h"
+#include "qualifs.h"
+#include "course.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -27,11 +27,11 @@ void worker(int nprocesses)
 {
 	int pid;
 	isRace = 0;
-	if(getpid()==pidList[0] && nprocesses==0) //=> processus parent aprËs tous les fork()
+	if(getpid()==pidList[0] && nprocesses==0) //=> processus parent apr√®s tous les fork()
 	{
 		
-		//DÈbut de practice 1
-		//le parent sleep() jusqu'‡ ce que tous les enfants aient finis
+		//D√©but de practice 1
+		//le parent sleep() jusqu'√† ce que tous les enfants aient finis
 		structCar temp[20];
 		while(smv[0]!=20)
 		{
@@ -51,7 +51,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 		
-		//Les voitures ont terminÈ le practice donc on gÈnËre le fichier rÈcap
+		//Les voitures ont termin√© le practice donc on g√©n√®re le fichier r√©cap
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		generateRecapFilePractice();
@@ -61,9 +61,9 @@ void worker(int nprocesses)
 		//et quitte le programme
 		interaction(0);
 		
-		//DÈbut de practice 2
+		//D√©but de practice 2
 		wakeChildren();
-		//le parent sleep() jusqu'‡ ce que tous les enfants aient finis
+		//le parent sleep() jusqu'√† ce que tous les enfants aient finis
 		while(smv[1]!=20)
 		{
 			id_sem = semop(id_sem, &semWait, 1);
@@ -82,7 +82,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 		
-		//Les voitures ont terminÈ le practice donc on gÈnËre le fichier rÈcap
+		//Les voitures ont termin√© le practice donc on g√©n√®re le fichier r√©cap
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		generateRecapFilePractice();
@@ -93,9 +93,9 @@ void worker(int nprocesses)
 		interaction(1);
 		
 		
-		//dÈbut de practice 3
+		//d√©but de practice 3
 		wakeChildren();
-		//le parent sleep() jusqu'‡ ce que tous les enfants aient finis
+		//le parent sleep() jusqu'√† ce que tous les enfants aient finis
 		while(smv[2]!=20)
 		{
 			id_sem = semop(id_sem, &semWait, 1);
@@ -114,7 +114,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 		
-		//Les voitures ont terminÈ le practice donc on gÈnËre le fichier rÈcap
+		//Les voitures ont termin√© le practice donc on g√©n√®re le fichier r√©cap
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		generateRecapFilePractice();
@@ -124,9 +124,9 @@ void worker(int nprocesses)
 		//et quitte le programme
 		interaction(2);
 		
-		//dÈbut de practice qualif 1
+		//d√©but de practice qualif 1
 		wakeChildren();
-		//le parent sleep() jusqu'‡ ce que tous les enfants aient finis
+		//le parent sleep() jusqu'√† ce que tous les enfants aient finis
 		while(smv[3]!=20)
 		{
 			id_sem = semop(id_sem, &semWait, 1);
@@ -144,7 +144,7 @@ void worker(int nprocesses)
 			}
 			sleep(1);
 		}
-		//CrÈation d'une variable temporaire qui trie les voitures
+		//Cr√©ation d'une variable temporaire qui trie les voitures
 		id_sem = semop(id_sem, &semWait, 1);
 		id_sem = semop(id_sem, &semDo, 1);
 		for(int i =0; i<20; i++)
@@ -156,25 +156,25 @@ void worker(int nprocesses)
 		sortCars(temp, 20);
 		buildStartPosition(temp, 1);
 		
-		//On crÈe le rÈcap file pour la qualif
+		//On cr√©e le r√©cap file pour la qualif
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		generateRecapFileQualif();
 		semop(id_sem, &semPost, 1);
 		
-		//On Èlimine les voitures pas assez rapides
+		//On √©limine les voitures pas assez rapides
 		id_sem = semop(id_sem, &semWait, 1);
 		id_sem = semop(id_sem, &semDo, 1);
 		setOut(2);
 		id_sem = semop(id_sem, &semPost, 1);
 		
-		//On demande ‡ l'utilisateur si il veut continuer, si oui smv[3]=0 sinon on kill les enfants et exit
+		//On demande √† l'utilisateur si il veut continuer, si oui smv[3]=0 sinon on kill les enfants et exit
 	
 		interaction(3);
 		
-		//DÈbut de qualif 2
+		//D√©but de qualif 2
 		wakeChildren();
-		//Le processus parent dort jusqu'‡ la fin de l'exÈcution des enfants
+		//Le processus parent dort jusqu'√† la fin de l'ex√©cution des enfants
 		while(smv[4]!=20)
 		{
 			id_sem = semop(id_sem, &semWait, 1);
@@ -192,27 +192,27 @@ void worker(int nprocesses)
 			}
 			sleep(1);
 		}
-		//Construction de la liste de dÈpart
+		//Construction de la liste de d√©part
 		sortCars(carsQualif2, 15);
 		buildStartPosition(carsQualif2, 2);
 		
-		//Les voitures ont terminÈ la qualif, on crÈe le fichier rÈcap
+		//Les voitures ont termin√© la qualif, on cr√©e le fichier r√©cap
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		generateRecapFileQualif();
 		semop(id_sem, &semPost, 1);
 		
-		//On Èlimine les voitures les plus lentes
+		//On √©limine les voitures les plus lentes
 		id_sem = semop(id_sem, &semWait, 1);
 		id_sem = semop(id_sem, &semDo, 1);
 		setOut(3);
 		id_sem = semop(id_sem, &semPost, 1);
 		
-		//On demande ‡ l'utilisateur si il veut continuer, si oui smv[4]=0 sinon on kill les enfants et exit
+		//On demande √† l'utilisateur si il veut continuer, si oui smv[4]=0 sinon on kill les enfants et exit
 		interaction(4);
-		//DÈbut de qualif 3
+		//D√©but de qualif 3
 		wakeChildren();
-		//Le processus parent dort jusqu'‡ la fin de l'exÈcution des enfants
+		//Le processus parent dort jusqu'√† la fin de l'ex√©cution des enfants
 		while(smv[5]!=20)
 		{
 			id_sem = semop(id_sem, &semWait, 1);
@@ -230,24 +230,24 @@ void worker(int nprocesses)
 			}
 			sleep(1);
 		}
-		//Construction de la liste de dÈpart
+		//Construction de la liste de d√©part
 		sortCars(carsQualif3, 10);
 		buildStartPosition(carsQualif3, 3);
 		
-		//GÈnÈration du rÈcap file
+		//G√©n√©ration du r√©cap file
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		generateRecapFileQualif();
 		semop(id_sem, &semPost, 1);
 		
-		//On demande ‡ l'utilisateur si il veut continuer, si oui smv[5]=0 sinon on kill les enfants et exit
+		//On demande √† l'utilisateur si il veut continuer, si oui smv[5]=0 sinon on kill les enfants et exit
 		interaction(5);
-		//DÈbut de la course!
+		//D√©but de la course!
 		wakeChildren();
-		//on ajoute du temps aux voitures en fonction de leur position de dÈpart
+		//on ajoute du temps aux voitures en fonction de leur position de d√©part
 		addTimeByPosition();
 		isRace = 1;
-		//Le processus parent dort jusqu'‡ la fin de l'exÈcution des enfants
+		//Le processus parent dort jusqu'√† la fin de l'ex√©cution des enfants
 		while(smv[6]!=20)
 		{
 			id_sem = semop(id_sem, &semWait, 1);
@@ -266,7 +266,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 		
-		//GÈnÈration du rÈcap file
+		//G√©n√©ration du r√©cap file
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		generateRecapFileRace();
@@ -277,29 +277,29 @@ void worker(int nprocesses)
 	}
 	
 	
-	if(nprocesses > 0) //Tous les fork() ne sont pas terminÈs
+	if(nprocesses > 0) //Tous les fork() ne sont pas termin√©s
 	{
 		if ((pid = fork()) < 0)
 		{
 			perror("fork\n");
 			exit(EXIT_FAILURE);
 		}
-		else if (pid == 0)//DÈbut du processus enfant
+		else if (pid == 0)//D√©but du processus enfant
 		{
 			signal(SIGCONT, handleSignal);
 			//Sleep une seconde pour permettre au parent de finir de forker
 			sleep(1);
 			
-			//DÈbut de practice 1
+			//D√©but de practice 1
 			int index;
 			
-			//On dÈtermine quelle voiture appartient ‡ quel processus
+			//On d√©termine quelle voiture appartient √† quel processus
 			semop(id_sem, &semWait2, 1);
 			semop(id_sem, &semDo2, 1);
 			index = indexOf(getpid(), 21, pidList);//index-1 = index de la voiture
 			semop(id_sem, &semPost2, 1);
 			
-			//Seed pour le gÈnÈrateur alÈatoire
+			//Seed pour le g√©n√©rateur al√©atoire
 			srand(time(NULL)+getpid());
 			
 			if(index==21 || index==0)
@@ -309,56 +309,56 @@ void worker(int nprocesses)
 				exit(EXIT_FAILURE);
 			}
 			practice(index-1, 1);
-			//Attends que les autres aient terminÈs et que le parent imprime le fichier rÈcap
+			//Attends que les autres aient termin√©s et que le parent imprime le fichier r√©cap
 			while(smv[0]!=0)
 			{
 				sleep(1);
 			}
 			
-			//DÈbut de practice 2
+			//D√©but de practice 2
 			practice(index-1, 2);
-			//Attends que les autres aient terminÈs et que le parent imprime le fichier rÈcap
+			//Attends que les autres aient termin√©s et que le parent imprime le fichier r√©cap
 			while(smv[1]!=0)
 			{
 				sleep(1);
 			}
 			
-			//dÈbut de practice 3
+			//d√©but de practice 3
 			practice(index-1, 3);
-			//Attends que les autres aient terminÈs et que le parent imprime le fichier rÈcap
+			//Attends que les autres aient termin√©s et que le parent imprime le fichier r√©cap
 			while(smv[2]!=0)
 			{
 				sleep(1);
 			}
 			
-			//DÈbut de qualif 1
+			//D√©but de qualif 1
 			qualif(index-1, 1);
-			//Attends que les autres aient terminÈs et que le parent imprime le fichier rÈcap
+			//Attends que les autres aient termin√©s et que le parent imprime le fichier r√©cap
 			while(smv[3]!=0)
 			{
 				sleep(1);
 			}
 			
-			//DÈbut de qualif 2
+			//D√©but de qualif 2
 			qualif(index-1, 2);
-			//Attends que les autres aient terminÈs et que le parent imprime le fichier rÈcap
+			//Attends que les autres aient termin√©s et que le parent imprime le fichier r√©cap
 			while(smv[4]!=0)
 			{
 				sleep(1);
 			}
 			
-			//DÈbut de qualif 3
+			//D√©but de qualif 3
 			qualif(index-1, 3);
-			//Attends que les autres aient terminÈs et que le parent imprime le fichier rÈcap
+			//Attends que les autres aient termin√©s et que le parent imprime le fichier r√©cap
 			while(smv[5]!=0)
 			{
 				sleep(1);
 			}
 			
-			//DÈbut de la course!
+			//D√©but de la course!
 			race(index-1);
 			
-			//Exit quand tout est terminÈ
+			//Exit quand tout est termin√©
 			exit(0);
 			
 		}
@@ -377,14 +377,14 @@ void worker(int nprocesses)
 
 int main(int argc, char *argv[])
 {
-	int key = 123;//ClÈ shared memory
-	int key1 = 789;//ClÈ second shared memory
-	int key2 = 999;//ClÈ third shared memory
-	int key3 = 888;//ClÈ fourth shared memory
-	int key4 = 777;//ClÈ fifth shared memory
-	int keyS = 456;//ClÈ semaphore
+	int key = 123;//Cl√© shared memory
+	int key1 = 789;//Cl√© second shared memory
+	int key2 = 999;//Cl√© third shared memory
+	int key3 = 888;//Cl√© fourth shared memory
+	int key4 = 777;//Cl√© fifth shared memory
+	int keyS = 456;//Cl√© semaphore
 	
-	//CrÈation du sÈmaphore
+	//Cr√©ation du s√©maphore
 	if ((id_sem = semget(keyS, 3, IPC_CREAT|0666)) == -1) {
 		perror("semget: semget failed");
 		exit(1);
@@ -397,7 +397,7 @@ int main(int argc, char *argv[])
 	int temp1[7];
 	int temp2[21];
 	
-	//CrÈation de la shared memory
+	//Cr√©ation de la shared memory
 	int id_shm = shmget(key, sizeof(temp), IPC_CREAT|0666); //autorisation 0666??
 	int id_shm1 = shmget(key1, sizeof(temp1), IPC_CREAT|0666);
 	int id_shm2 = shmget(key2, sizeof(temp2), IPC_CREAT|0666);
@@ -439,13 +439,13 @@ int main(int argc, char *argv[])
 	int c[20] = {44,77,3,33,5,7,11,31,19,18,14,2,10,55,8,20,27,30,9,94};
 	for(int i=0; i<20; i++)
 	{
-		//Bloquage des sÈmaphores
+		//Bloquage des s√©maphores
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		init(i,c[i]);
 		semop(id_sem, & semPost, 1);
 		startPosition[i]=0;
-		//DÈbloquage des sÈmphores
+		//D√©bloquage des s√©mphores
 	}
 	
 	//Initialisation des variables "gobales"
@@ -464,7 +464,7 @@ int main(int argc, char *argv[])
 	smv[10]=0; //topTour
 	semop(id_sem, &semPost1, 1);
 	
-	//initialisation des valeurs de pidList (valeurs = -1 pour permettre la dÈtection d'erreurs)
+	//initialisation des valeurs de pidList (valeurs = -1 pour permettre la d√©tection d'erreurs)
 	semop(id_sem, &semWait2, 1);
 	semop(id_sem, &semDo2, 1);
 	pidList[0]=getpid();
@@ -493,7 +493,7 @@ int main(int argc, char *argv[])
 	worker(20);
 	
 	
-	//Ici on dÈtache la mÈmoire partagÈe et on supprimer les sÈmaphores
+	//Ici on d√©tache la m√©moire partag√©e et on supprimer les s√©maphores
 	if((shmdt(cars))==-1)
 	{
 		perror("shmdt foireux a");
