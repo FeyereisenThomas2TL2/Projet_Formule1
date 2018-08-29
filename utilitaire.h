@@ -2,10 +2,16 @@
 #define utilitaire_h
 #include "voiture.h"
 #include <sys/types.h>
+#include <sys/time.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
+#include <sys/shm.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <errno.h>
+#include <signal.h>
 
 //déclaration des variables utiles
 int nbrLapMax;
