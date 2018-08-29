@@ -5,14 +5,14 @@
 void init(int i, int name)
 {
 	cars[i].name = name;
-	cars[i].bestCircuit=0;
-	cars[i].bestS1=0;
-	cars[i].bestS2=0;
-	cars[i].bestS3=0;
+	cars[i].bestCircuit=0;		//meilleur temps
+	cars[i].bestS1=0;		//meilleur sur secteur 1
+	cars[i].bestS2=0;		//meilleur sur secteur 2
+	cars[i].bestS3=0;		//meilleur sur secteur 3
 	cars[i].numCircuit=0;
 	cars[i].currTime=0;
 	cars[i].currCircuit=0;
-	cars[i].inStand=0;	//22 à 27 secondes
+	cars[i].inStand=0;		//22 à 27 secondes
 	cars[i].isOut=0;
 	
 	if(i<10)
