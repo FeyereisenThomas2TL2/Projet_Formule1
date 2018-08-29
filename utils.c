@@ -233,7 +233,7 @@ char askAction()
 	return c;
 }
 //Imprime à l'écran le résultat actuel de la course
-void printResult() {
+/*void printResult() {
 
 		printf("\n\n\n\n\nPractice %i :\n\n", o);
 		printf("\n| N Voiture |     Top  S1    |     Top  S2    |     Top  S3    |    Top  Tour     |    Temps Global    |\n");
@@ -241,7 +241,7 @@ void printResult() {
 			printf("|     %2d    |   %9f s  |   %9f s  |   %9f s  |    %9f s   |    %4.6f s   |\n", temp[i].name, temp[i].bestS1, temp[i].bestS2, temp[i].bestS3, temp[i].bestCircuit, temp[i].currTime);
 		}
 		sleep(1);
-}
+}*/
 void interaction(int i)
 {
 	char c = askAction();
