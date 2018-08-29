@@ -1,6 +1,6 @@
 #ifndef utils_h
 #define utils_h
-//#include "voiture.h"
+#include <ctype.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/ipc.h>
