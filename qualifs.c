@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double timeQualif1 = 1080;
-double timeQualif2 = 900;
-double timeQualif3 = 720;
+double timeQualif1 = 500;
+double timeQualif2 = 500;
+double timeQualif3 = 250;
 
 void sortCars(structCar carsQualif[], int sizeArrayCars)
 {
