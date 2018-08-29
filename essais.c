@@ -1,9 +1,9 @@
 #include "utils.h"
 //#include "essais.h"
 
-double time1 = 5400;
-double time2 = 5400;
-double time3 = 3600;
+double time1 = 500;
+double time2 = 500;
+double time3 = 250;
 
 void practice(int index, int p)
 {
