@@ -1,4 +1,4 @@
-#include "utilitaire.h"
+#include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
@@ -9,28 +9,28 @@
 //Valeur du semaphore 0
 struct sembuf semWait = {0,0,SEM_UNDO};
 
-//Incrémente le semaphore pour le bloquer
+//IncrÃ©mente le semaphore pour le bloquer
 struct sembuf semDo = {0,1,SEM_UNDO|IPC_NOWAIT};
 
-//Décrémente le semaphore pour le débloquer
+//DÃ©crÃ©mente le semaphore pour le dÃ©bloquer
 struct sembuf semPost = {0,-1,SEM_UNDO|IPC_NOWAIT};
 
 //Valeur du semaphore 0
 struct sembuf semWait1 = {1,0,SEM_UNDO};
 
-//Incrémente le semaphore pour le bloquer
+//IncrÃ©mente le semaphore pour le bloquer
 struct sembuf semDo1 = {1,1,SEM_UNDO|IPC_NOWAIT};
 
-//Décrémente le semaphore pour le débloquer
+//DÃ©crÃ©mente le semaphore pour le dÃ©bloquer
 struct sembuf semPost1 = {1,-1,SEM_UNDO|IPC_NOWAIT};
 
 //Valeur du semaphore 0
 struct sembuf semWait2 = {2,0,SEM_UNDO};
 
-//Incrémente le semaphore pour le bloquer
+//IncrÃ©mente le semaphore pour le bloquer
 struct sembuf semDo2 = {2,1,SEM_UNDO|IPC_NOWAIT};
 
-//Décrémente le semaphore pour le débloquer
+//DÃ©crÃ©mente le semaphore pour le dÃ©bloquer
 struct sembuf semPost2 = {2,-1,SEM_UNDO|IPC_NOWAIT};
 
 //Change les heures en secondes
@@ -43,17 +43,17 @@ int generateRandom(int min_number, int max_number){
 }
 
 int pitStop(int i) {
-	int timeStop = 0; // Temps passé au pit stop
+	int timeStop = 0; // Temps passÃ© au pit stop
 	
-	// 15% de chance de s'arrêter au pit stop
+	// 15% de chance de s'arrÃªter au pit stop
 	if (generateRandom(0, 99) > 84) {
-		cars[i].inStand ++; //Incrémente le nombre d'arrêts au stand de la voiture
+		cars[i].inStand ++; //IncrÃ©mente le nombre d'arrÃªts au stand de la voiture
 		timeStop += (generateRandom(24, 40)/10.0);
 	}
 	
-	// obligation de s'arrêter au stand au moins une fois par course
+	// obligation de s'arrÃªter au stand au moins une fois par course
 	if (cars[i].inStand == 0 && cars[i].numCircuit == nbrLapMax){
-		cars[i].inStand ++; //Incrémente le nombre d'arrêts au stand de la voiture
+		cars[i].inStand ++; //IncrÃ©mente le nombre d'arrÃªts au stand de la voiture
 		timeStop += (generateRandom(24, 40)/10.0);
 	}
 	
@@ -82,9 +82,9 @@ double getCurrTime()
 
 int nbrLaps(int km)
 {
-	int nbr = 70;			// Nombre de tours par défaut
+	int nbr = 70;			// Nombre de tours par dÃ©faut
 	int lengthMinRace = 305;	// Taille de course minimale
-	if(km == 0)  //Si l'utilisateur ne rentre pas de nombre pour les kilomètres
+	if(km == 0)  //Si l'utilisateur ne rentre pas de nombre pour les kilomÃ¨tres
 	{
 		return nbr;
 	}
@@ -134,7 +134,7 @@ void generateTimeS1(int i)
 	double time;
 	
 	if(!(isRace == 1 && cars[i].numCircuit == 0)){
-		cars[i].currCircuit = 0.0;  //remet à 0 le temps pour le tour courant
+		cars[i].currCircuit = 0.0;  //remet Ã  0 le temps pour le tour courant
 	}
 	
 	double averageSpeed = (double)(generateRandom(3450, 3750)/10);
@@ -232,7 +232,7 @@ char askAction()
 	
 	return c;
 }
-//Imprime à l'écran le résultat actuel de la course
+//Imprime Ã  l'Ã©cran le rÃ©sultat actuel de la course
 void printResult() {
 
 		printf("\n\n\n\n\nPractice %i :\n\n", o);
@@ -288,7 +288,7 @@ void sortRace(structCar carsQualif[], int sizeArrayCars)
 		//Rempli l'array
 	{
 		for(j = i+1; j < sizeArrayCars; j++)
-			//Vérifie qu'il n'y a pas de valeur plus petite
+			//VÃ©rifie qu'il n'y a pas de valeur plus petite
 		{
 			if((carsQualif[j].currTime < carsQualif[i].currTime)&&(carsQualif[j].isOut==0))
 			{
