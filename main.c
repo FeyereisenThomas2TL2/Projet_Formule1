@@ -1,8 +1,8 @@
-#include "voiture.h"
+//#include "voiture.h"
 #include "utils.h"
-#include "essais.h"
-#include "qualifs.h"
-#include "course.h"
+//#include "essais.h"
+//#include "qualifs.h"
+//#include "course.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
