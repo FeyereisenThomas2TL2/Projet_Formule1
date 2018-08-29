@@ -1,5 +1,5 @@
-#include "utilitaire.h"
-#include "race.h"
+#include "utils.h"
+#include "course.h"
 
 
 void sortCarsByCurrTime(structCar carsRace[])
@@ -12,7 +12,7 @@ void sortCarsByCurrTime(structCar carsRace[])
 		//Rempli l'array => BubbleSort
 	{
 		for(j = i+1; j < 20; j++)
-			//Vérifie si il n'y a pas un nombre plus petit dans la case suivante?
+			//VÃ©rifie si il n'y a pas un nombre plus petit dans la case suivante?
 		{
 			if(carsRace[j].numCircuit == carsRace[i].numCircuit && carsRace[j].currTime < carsRace[i].currTime)
 			{
@@ -78,7 +78,7 @@ void race(int index)
 		
 		if(cars[index].isOut == 0)
 		{
-			cars[index].numCircuit++; //Incrémente le nombre de circuit déjà performé
+			cars[index].numCircuit++; //IncrÃ©mente le nombre de circuit dÃ©jÅ• performÃ©
 		}
 	}
 	
@@ -109,7 +109,7 @@ void generateRecapFileRace()
 	else{
 		printf("Ouverture du fichier recap impossible");
 	}
-	//Après avoir sauvegardé les valeurs dans un fichier, on remet à 0 pour lancer un nouveau pratice
+	//AprÄs avoir sauvegardÃ© les valeurs dans un fichier, on remet Å• 0 pour lancer un nouveau pratice
 	for(int i=0; i<20; i++)
 	{
 		reset(i);
